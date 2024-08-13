@@ -1,0 +1,278 @@
+Sw17_9#SH RUN
+Building configuration...
+
+Current configuration : 7208 bytes
+!
+! Last configuration change at 18:08:03 CST Wed Jan 31 2024 by cpachecoa
+! NVRAM config last updated at 18:08:03 CST Wed Jan 31 2024 by cpachecoa
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime localtime
+no service password-encryption
+service internal
+service unsupported-transceiver
+!
+hostname Sw17_9
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$4sJp$P./F3WaquVsl28qb1LlEQ/
+!
+username regiona privilege 15 secret 5 $1$zlms$429fLVpw//UFUb1RNx5vS1
+username administrador privilege 15 secret 5 $1$82X4$R4TpAzQRoitiGS4yPDlaa1
+!
+!
+aaa new-model
+!
+!
+aaa authentication banner ^C
+
+  XXXXX  XXXX  XXXXX   XXXX XXXXX XXXX        XXXX  XXXXX  XXXX      X
+  X     X    X X      X       X  X    X       X   X X     X         X X
+  X     X      X      X       X  X    X       X   X X     X        X   X
+  XXXX  X  XXX XXXX   X  XXX  X  X    X  XXX  XXXX  XXXX  X  XXX   XXXXX
+  X     X    X X      X    X  X  X    X       X  X  X     X    X   X   X
+  X     X    X X      X    X  X  X    X       X   X X     X    X   X   X
+  X      XXXX  XXXXX   XXXX   X   XXXX        X   X XXXXX  XXXX    X   X
+
+              FISCALIA GENERAL DEL ESTADO DE GUANAJUATO
+TODO INTENTO DE ACCESO NO PERMITIDO SERA PERSEGUIDO Y SANCIONADO LEGALMENTE
+^C
+aaa authentication password-prompt Contrasena:
+aaa authentication username-prompt Usuario:
+aaa authentication login default group radius local
+!
+!
+!
+aaa session-id common
+clock timezone CST -6
+system mtu routing 1500
+!
+!
+no ip domain-lookup
+ip domain-name pgjleon
+!
+vmps reconfirm 10
+vmps retry 10
+vmps server 192.168.16.44 primary
+!
+crypto pki trustpoint TP-self-signed-4217348608
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4217348608
+ revocation-check none
+ rsakeypair TP-self-signed-4217348608
+!
+!
+crypto pki certificate chain TP-self-signed-4217348608
+ certificate self-signed 01
+  3082024B 308201B4 A0030201 02020101 300D0609 2A864886 F70D0101 04050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 34323137 33343836 3038301E 170D3933 30333031 30303032
+  32305A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D34 32313733
+  34383630 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100DB16 A59BEAD9 83264726 5EC36F6B B4957D32 843F34E3 81F82CCE 9836C8BE
+  1C5B8D45 C7586C78 F2297A82 7F63D0CD 2872FE09 FC0659E0 AE60179A 6BB6E309
+  51A701C8 87AB938A D9618A29 AC82DCA1 9EA38F07 DC872E0A 8536C389 378421B2
+  A1736397 D004C5D4 6DE439EB 5C66F804 2735ED89 30C77730 0002D0D0 6737E9EB
+  CD910203 010001A3 73307130 0F060355 1D130101 FF040530 030101FF 301E0603
+  551D1104 17301582 13455052 34535731 34382D33 2E70676A 6C656F6E 301F0603
+  551D2304 18301680 1441BD70 4A9DA13B DF92F0C3 8CDEB6DF 2D43C444 3C301D06
+  03551D0E 04160414 41BD704A 9DA13BDF 92F0C38C DEB6DF2D 43C4443C 300D0609
+  2A864886 F70D0101 04050003 818100A7 A7E30A85 0F91529A CAD4E65E 6A6317D4
+  5CE60E93 A91DC3DF 7109EB9C FD8A8CF7 697ABA93 C20AA101 620BBB3B 250B7FE0
+  5BD55BC4 4236557F B4A6074B 0D603BD8 50AAE5E5 DC6AC78C 67990E14 357BD150
+  CB640F30 D782F6FB DA2AD435 E2FBAC11 2096100D 4DE77443 04175345 849B1CC8
+  673D4263 EF357F02 82181BF3 9BC879
+  quit
+!
+!
+!
+no errdisable detect cause gbic-invalid
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+lldp run
+!
+ip ssh time-out 15
+ip ssh authentication-retries 2
+ip ssh version 2
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 9
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ description AP_UEMA
+ switchport trunk native vlan 47
+ switchport mode trunk
+!
+interface FastEthernet0/17
+ description TempSw17.15
+ switchport mode trunk
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ description AP_UTC
+ switchport trunk native vlan 47
+ switchport mode trunk
+!
+interface FastEthernet0/19
+ switchport trunk native vlan 47
+ switchport mode trunk
+!
+interface FastEthernet0/20
+ switchport access vlan 18
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ description BiometricoUTC
+ switchport access vlan 18
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport access vlan 8
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/23
+ switchport access vlan 8
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+!
+interface FastEthernet0/24
+ description Conexion17_4
+ switchport mode trunk
+ spanning-tree portfast
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan17
+ ip address 192.168.17.9 255.255.255.224
+!
+ip default-gateway 192.168.17.30
+ip http server
+ip http secure-server
+kron occurrence Respaldo at 17:00 Fri recurring
+ policy-list Respaldo
+!
+kron policy-list Respaldo
+ cli show startup-config | redirect tftp://192.168.16.70/Leon_SW_17_9.txt
+!
+radius-server host 192.168.16.70 auth-port 1645 acct-port 1646 key 7 14141B180F0B
+radius-server key 7 1511021F0725
+!
+line con 0
+ password 7 03145C010A0A2E42
+line vty 0 2
+ transport input ssh
+line vty 3 4
+ transport input none
+line vty 5 15
+ transport input none
+!
+ntp clock-period 36029420
+ntp server 172.16.4.1
+end
